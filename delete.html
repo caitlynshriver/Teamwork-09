@@ -1,0 +1,39 @@
+<html> 
+	<head> 
+	<script src="https://www.gstatic.com/firebasejs/7.5.1/firebase-app.js"></script> 
+	<script src="https://www.gstatic.com/firebasejs/7.5.1/firebase-database.js"></script>
+
+<script> // Your web app's Firebase configuration 
+var firebaseConfig = {
+          apiKey: "AIzaSyBZws8who2yv7pIp2r2TZQ7r7Kyp_GZ_uQ",
+  authDomain: "teamwork-08-89bb9.firebaseapp.com",
+  databaseURL: "https://teamwork-08-89bb9.firebaseio.com",
+  projectId: "teamwork-08-89bb9",
+  storageBucket: "teamwork-08-89bb9.appspot.com",
+  messagingSenderId: "121069152669",
+  appId: "1:121069152669:web:c6f4f85f3de9f13e5ea774",
+  measurementId: "G-YT68J1Z86W"
+
+	};
+
+        // Initialize Firebase
+
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics(); 
+</script> 
+
+<!-- KEEP THESE <script> sections separate. --> 
+
+<script> 
+	// Delete (remove) all values. 
+	path = '/'; 
+	firebase.database().ref(path).remove().then(()=>{ 
+		alert('Database has been emptied.'); 
+		history.go(-1); 
+}); 
+</script> 
+	</head> 
+		<body> 
+			<div id='result'></div> 
+		</body> 
+</html> 
