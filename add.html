@@ -1,0 +1,106 @@
+<html>
+
+  <head>
+
+    <title>ADD CUSTOMER</title>
+
+    <script src="https://www.gstatic.com/firebasejs/7.5.1/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.5.1/firebase-database.js"></script>
+
+    <script>
+
+      // Your web app's Firebase configuration
+
+      var firebaseConfig = {
+        *** PASTE YOUR firebaseConfig HERE ***
+	};
+
+      // Initialize Firebase
+
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+
+    </script>
+
+    <!-- KEEP THESE <script> sections separate. -->
+
+    <script>
+
+      function go() {
+
+
+        // GET CUSTOMER DATA FROM INPUT BOXES
+
+        customer = document.getElementById('customer').value;
+
+        email = document.getElementById('email').value;
+
+
+        // REMOVE LEADING AND TRAILING SPACES FROM VALUES
+
+        customer = customer.trim();
+
+        email = email.trim();
+
+
+        // VALIDATE THAT DATA IS NOT NULL
+
+       if ((customer == '') || (email == '')) {
+
+          document.getElementById('result').innerHTML = "<span style='color: red;'>CUSTOMER and EMAIL required</span>";
+
+          return;
+
+        }
+
+
+        // MAKE THE PATH FOR THIS customer
+
+        path = '/customers/' + customer + '/';
+
+        // alert(path);
+
+
+        // ADD email AT PATH for this customer
+
+        firebase.database().ref(path).set({
+
+          email: email
+
+        }).then(()=>{
+
+
+          // DISPLAY STATUS MESSAGE
+
+          document.getElementById('result').innerHTML = ' CUSTOMER ' + customer + ' ADDED TO DATABASE';
+
+        });
+
+      }
+
+    </script>
+
+   </head>
+
+  <body>
+
+    <h2>ADD NEW CUSTOMER</h2>
+
+    <table>
+
+        <tr><td>CUSTOMER NAME:<td><input id='customer'>
+
+        <tr><td>CUSTOMER EMAIL ADDRESS:<td><input id='email'>
+
+        <tr><td><input type = 'button' value = 'GO' onclick='go()'>
+
+    </table>
+
+    <br>
+
+    <span id='result' style='font-weight:bold;'></span>
+
+  </body>
+
+</html>
