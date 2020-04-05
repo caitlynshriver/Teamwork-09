@@ -2,19 +2,28 @@
 
   <head>
 
-    <title>ADD CUSTOMER</title>
+    <title>ADD MEMBER</title>
 
-    <script src="https://www.gstatic.com/firebasejs/7.5.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
 
-    <script src="https://www.gstatic.com/firebasejs/7.5.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-database.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-analytics.js"></script>
 
     <script>
 
       // Your web app's Firebase configuration
 
       var firebaseConfig = {
-        *** PASTE YOUR firebaseConfig HERE ***
-	};
+        apiKey: "AIzaSyBw-C6Ugvq9rFOxHuufXn9lHq9wlxzevxQ",
+        authDomain: "teamwork-09.firebaseapp.com",
+        databaseURL: "https://teamwork-09.firebaseio.com",
+        projectId: "teamwork-09",
+        storageBucket: "teamwork-09.appspot.com",
+        messagingSenderId: "973730156406",
+        appId: "1:973730156406:web:ee90a6a86e7f4f1c4ff457",
+        measurementId: "G-3WHMT942B7"
+        };
 
       // Initialize Firebase
 
@@ -32,23 +41,23 @@
 
         // GET CUSTOMER DATA FROM INPUT BOXES
 
-        customer = document.getElementById('customer').value;
+        member = document.getElementById('member').value;
 
-        email = document.getElementById('email').value;
+        pic = document.getElementById('pic').value;
 
 
         // REMOVE LEADING AND TRAILING SPACES FROM VALUES
 
-        customer = customer.trim();
+        member = member.trim();
 
-        email = email.trim();
+        pic = pic.trim();
 
 
         // VALIDATE THAT DATA IS NOT NULL
 
-       if ((customer == '') || (email == '')) {
+       if ((member == '') || (pic == '')) {
 
-          document.getElementById('result').innerHTML = "<span style='color: red;'>CUSTOMER and EMAIL required</span>";
+          document.getElementById('result').innerHTML = "<span style='color: red;'>MEMBER and IMAGE NAME required</span>";
 
           return;
 
@@ -57,7 +66,7 @@
 
         // MAKE THE PATH FOR THIS customer
 
-        path = '/customers/' + customer + '/';
+        path = '/member/' + member + '/';
 
         // alert(path);
 
@@ -66,14 +75,14 @@
 
         firebase.database().ref(path).set({
 
-          email: email
+          pic: pic
 
         }).then(()=>{
 
 
           // DISPLAY STATUS MESSAGE
 
-          document.getElementById('result').innerHTML = ' CUSTOMER ' + customer + ' ADDED TO DATABASE';
+          document.getElementById('result').innerHTML = ' MEMBER ' + member + ' ADDED TO DATABASE';
 
         });
 
@@ -85,13 +94,15 @@
 
   <body>
 
-    <h2>ADD NEW CUSTOMER</h2>
+    <h2>ADD NEW CREW MEMBER</h2>
+
+    <button onclick="window.location.href = 'INDEX.html';">HOME</button><br><br>
 
     <table>
 
-        <tr><td>CUSTOMER NAME:<td><input id='customer'>
+        <tr><td>CREW MEMBER NAME:<td><input id='member'>
 
-        <tr><td>CUSTOMER EMAIL ADDRESS:<td><input id='email'>
+        <tr><td>IMAGE NAME:<td><input id='pic'>
 
         <tr><td><input type = 'button' value = 'GO' onclick='go()'>
 

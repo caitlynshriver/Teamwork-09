@@ -2,7 +2,7 @@
 
   <head>
 
-    <title>DISPLAY CUSTOMERS</title>
+    <title>DISPLAY MEMBERS</title>
 
     <style>
 
@@ -14,16 +14,25 @@
 
     </style>
 
-      <script src="https://www.gstatic.com/firebasejs/7.5.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
 
-      <script src="https://www.gstatic.com/firebasejs/7.5.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-database.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-analytics.js"></script>
 
       <script>
 
         // Your web app's Firebase configuration
 
         var firebaseConfig = {
-          *** PASTE YOUR firebaseConfig HERE ***
+        apiKey: "AIzaSyBw-C6Ugvq9rFOxHuufXn9lHq9wlxzevxQ",
+        authDomain: "teamwork-09.firebaseapp.com",
+        databaseURL: "https://teamwork-09.firebaseio.com",
+        projectId: "teamwork-09",
+        storageBucket: "teamwork-09.appspot.com",
+        messagingSenderId: "973730156406",
+        appId: "1:973730156406:web:ee90a6a86e7f4f1c4ff457",
+        measurementId: "G-3WHMT942B7"
 	};
 
         // Initialize Firebase
@@ -40,7 +49,7 @@
 
          // MAKE THE PATH TO ALL customers
 
-        path = '/customers/';
+        path = '/members/';
 
         //alert(path);
 
@@ -54,7 +63,7 @@
 
               // DISPLAY MESSAGE IF NO CUSTOMERS FOUND.
 
-              document.getElementById('result').innerHTML = "<span style='color: red;'>NO CUSTOMERS IN DATABASE</span>";
+              document.getElementById('result').innerHTML = "<span style='color: red;'>NO MEMBERS IN DATABASE</span>";
 
 
               // EXIT FUNCTION BECAUSE THERE ARE NO CUSTOMERS.
@@ -70,7 +79,7 @@
 
           // BEGIN THE TABLE TO DISPLAY CUSTOMER RECORDS.
 
-          content = '<table border=1><tr><td><b>#<td><b>CUSTOMER<td><b>EMAIL';
+          content = '<table border=1><tr><td><b>#<td><b>MEMBER<td><b>IMAGE';
 
 
           // Process each customer. ASdd 1 row for each customer to the table.
@@ -81,13 +90,13 @@
 
             var key = childSnapshot.key;
 
-            customer = key;
+            member = key;
 
-            email = obj.email;
+            pic = obj.pic;
 
             count++;
 
-            content += '<tr><td>' + count + '<td>' + customer + '<td>' + email;
+            content += '<tr><td>' + count + '<td>' + member + '<td>' + pic;
 
           });
 
@@ -112,7 +121,9 @@
 
   <body>
 
-    <h2>CUSTOMERS</h2>
+    <h2>MEMBERS</h2>
+
+    <button onclick="window.location.href = 'INDEX.html';">HOME</button><br><br>
 
     <span id='result' style='font-weight:bold;'>Waiting ...</span>
 
