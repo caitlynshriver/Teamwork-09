@@ -1,0 +1,121 @@
+<html>
+
+  <head>
+
+    <title>DISPLAY CUSTOMERS</title>
+
+    <style>
+
+      body {
+
+        font-family: arial;
+
+      }
+
+    </style>
+
+      <script src="https://www.gstatic.com/firebasejs/7.5.1/firebase-app.js"></script>
+
+      <script src="https://www.gstatic.com/firebasejs/7.5.1/firebase-database.js"></script>
+
+      <script>
+
+        // Your web app's Firebase configuration
+
+        var firebaseConfig = {
+          *** PASTE YOUR firebaseConfig HERE ***
+	};
+
+        // Initialize Firebase
+
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+      </script>
+
+      <!-- KEEP THESE <script> sections separate. -->
+
+      <script>
+
+
+         // MAKE THE PATH TO ALL customers
+
+        path = '/customers/';
+
+        //alert(path);
+
+
+        firebase.database().ref(path).once('value', function(snapshot) {
+
+          var myJSON = JSON.stringify(snapshot);
+
+          if (myJSON == 'null') {
+
+
+              // DISPLAY MESSAGE IF NO CUSTOMERS FOUND.
+
+              document.getElementById('result').innerHTML = "<span style='color: red;'>NO CUSTOMERS IN DATABASE</span>";
+
+
+              // EXIT FUNCTION BECAUSE THERE ARE NO CUSTOMERS.
+
+              return;
+
+          };
+
+          // SET UP counter TO TRACK NUMBER OF customers
+          
+          count = 0;
+
+
+          // BEGIN THE TABLE TO DISPLAY CUSTOMER RECORDS.
+
+          content = '<table border=1><tr><td><b>#<td><b>CUSTOMER<td><b>EMAIL';
+
+
+          // Process each customer. ASdd 1 row for each customer to the table.
+
+          snapshot.forEach(function(childSnapshot) {
+
+            var obj = childSnapshot.val();
+
+            var key = childSnapshot.key;
+
+            customer = key;
+
+            email = obj.email;
+
+            count++;
+
+            content += '<tr><td>' + count + '<td>' + customer + '<td>' + email;
+
+          });
+
+          //alert(content);
+
+
+          // COMPLETE THE TABLE
+
+          content + "</table>";
+
+
+          // DISPLAY THE TABLE
+
+          document.getElementById('result').innerHTML = content;
+
+        });
+
+
+      </script>
+
+  </head>
+
+  <body>
+
+    <h2>CUSTOMERS</h2>
+
+    <span id='result' style='font-weight:bold;'>Waiting ...</span>
+
+  </body>
+
+</html>
