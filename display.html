@@ -36,7 +36,7 @@
 	};
 
         // Initialize Firebase
-
+        console.log('Initializing Firebase Database!');
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
 
@@ -49,7 +49,7 @@
 
          // MAKE THE PATH TO ALL customers
 
-        path = '/members/';
+        path = '/member/';
 
         //alert(path);
 
@@ -87,17 +87,16 @@
           snapshot.forEach(function(childSnapshot) {
 
             var obj = childSnapshot.val();
-
+            console.log("Val returned:"+obj);
             var key = childSnapshot.key;
-
+            console.log("Key returned:"+key);
             member = key;
-
             pic = obj.pic;
-
+            picPath = "images/"
+            console.log("String returned form obj.pic: "+pic);
             count++;
-
-            content += '<tr><td>' + count + '<td>' + member + '<td>' + pic;
-
+            content += '<tr><td>' + count + '<td>' + member + '<td>' + '<img src='+picPath+pic+' height=400<br><br>';
+            console.log("Content: "+content);
           });
 
           //alert(content);
@@ -105,7 +104,7 @@
 
           // COMPLETE THE TABLE
 
-          content + "</table>";
+          content += "</table>";
 
 
           // DISPLAY THE TABLE
@@ -121,7 +120,7 @@
 
   <body>
 
-    <h2>MEMBERS</h2>
+    <h2>THE CREW</h2>
 
     <button onclick="window.location.href = 'INDEX.html';">HOME</button><br><br>
 
