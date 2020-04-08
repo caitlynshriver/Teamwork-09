@@ -37,48 +37,31 @@
 
         // Initialize Firebase
 
+        // Initialize Firebase
+
         firebase.initializeApp(firebaseConfig);
-        firebase.analytics();
+        firebase.analytics(); 
+</script> 
 
-      </script>
+<!-- KEEP THESE <script> sections separate. --> 
 
-      <!-- KEEP THESE <script> sections separate. -->
-
-      <script>
-
-
-        // MAKE THE PATH TO ALL customers
-
-        path = '/members/';
-
-        //alert(path);
-
-
-        // EMPTY THE DATABASE AT PATH
-
-        firebase.database().ref(path).remove().then(()=>{
-
-
-          // DISPLAY STATUS MESSAGE
-
-          document.getElementById('result').innerHTML = 'DATABASE HAS BEEN EMPTIED';
-
-
-        });
-
-
-      </script>
-
-  </head>
-
-  <body>
+<script> 
+	// Delete (remove) all values. 
+	path = '/'; 
+	firebase.database().ref(path).remove().then(()=>{ 
+		alert('Database has been emptied.'); 
+}); 
+</script> 
+	</head> 
+		<body> 
+			<div id='result'></div> 
 
     <h2>EMPTY DATABASE</h2>
 
     <button onclick="window.location.href = 'INDEX.html';">HOME</button><br><br>
 
-    <span id='result' style='font-weight:bold;'>Waiting ...</span>
+    <span id='result' style='font-weight:bold;'></span>
 
   </body>
 
-</html>
+</html> 
